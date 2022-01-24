@@ -2,7 +2,6 @@ package com.origamienergy.forgettingmap;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class ForgettingMap<K, V>{
@@ -33,11 +32,8 @@ public class ForgettingMap<K, V>{
     private void removeTopmostUnused() {
         Set<K> leastUsedKeys = getLeastUsedKeys();
         for (K key: leastUsedKeys){
-            if (this.entries.containsKey(key))
-                this.entries.remove(key);
-
-            if (this.accessCounts.containsKey(key))
-                this.accessCounts.remove(key);
+            this.entries.remove(key);
+            this.accessCounts.remove(key);
         }
     }
 
